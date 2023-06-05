@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Movies',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: primaryColor,
       ),
       home: const HomePage(),
     );
