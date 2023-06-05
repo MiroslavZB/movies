@@ -8,6 +8,7 @@ class MovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: () => context.push(Paths.movieDetails, extra: movie),
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: ClipRRect(
