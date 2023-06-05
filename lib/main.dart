@@ -28,7 +28,9 @@ final _router = GoRouter(
       path: Paths.movieDetails,
       name: Paths.movieDetails,
       pageBuilder: (context, state) {
-        return NoTransitionPage(
+        return CustomTransitionPage<void>(
+          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+              FadeTransition(opacity: animation, child: child),
           child: DetailsPage(movie: state.extra as Movie),
         );
       },
