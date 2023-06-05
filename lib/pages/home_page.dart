@@ -24,13 +24,18 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(appName, style: styleH1Bold),
+        actions: [
+          IconButton(
+            onPressed: () => getMovies(),
+            icon: const Icon(
+              Icons.refresh,
+              color: onPrimaryColor,
+            ),
+          ),
+        ],
       ),
       body: Column(
         children: [
-          IconButton(
-            onPressed: () => getMovies(),
-            icon: const Icon(Icons.refresh),
-          ),
           Expanded(
             child: ListView.builder(
               itemCount: movies.length,
