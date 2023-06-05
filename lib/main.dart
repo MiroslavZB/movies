@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Movies',
       theme: ThemeData(
         primarySwatch: primaryColor,
+        fontFamily: 'Montserrat',
       ),
       home: const HomePage(),
     );
