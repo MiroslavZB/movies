@@ -67,13 +67,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: appName,
-      debugShowCheckedModeBanner: false,
-      routerConfig: _router,
-      theme: ThemeData(
-        primarySwatch: primaryColor,
-        fontFamily: 'Montserrat',
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<UserController>(
+          create: (_) => UserController(),
+        ),
+      ],
+      child: MaterialApp.router(
+        title: appName,
+        debugShowCheckedModeBanner: false,
+        routerConfig: _router,
+        theme: ThemeData(
+          primarySwatch: primaryColor,
+          fontFamily: 'Montserrat',
+        ),
       ),
     );
   }

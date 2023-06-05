@@ -1,5 +1,7 @@
+import 'package:movies/controllers/user_controller.dart';
 import 'package:movies/models/movie.dart';
 import 'package:movies/resources/utils.dart';
+import 'package:provider/provider.dart';
 
 class MovieCard extends StatelessWidget {
   const MovieCard({Key? key, required this.movie}) : super(key: key);
@@ -42,16 +44,34 @@ class MovieCard extends StatelessWidget {
             ),
           ),
         ),
-        IconButton(
-          onPressed: () {
-            // TODO
+        Consumer<UserController>(
+          builder: (_, controller, __) {
+            final bool state = controller.savedIndexes.contains(movie.id);
+            return Container(
+              margin: const EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: outlinedButtonColor,
+                  border: Border.all(
+                    color: outlineColor,
+                  )),
+              child: IconButton(
+                onPressed: () {
+                  if (state) {
+                    controller.removeId(movie.id);
+                  } else {
+                    controller.addId(movie.id);
+                  }
+                },
+                icon: Icon(
+                  state ? Icons.done : Icons.add,
+                  color: onPrimaryColor,
+                  size: mediumIconSize,
+                ),
+              ),
+            );
           },
-          icon: const Icon(
-            Icons.watch_later_outlined,
-            color: onPrimaryColor,
-            size: mediumIconSize,
-          ),
-        )
+        ),
       ],
     );
   }
@@ -92,7 +112,10 @@ class MovieCard extends StatelessWidget {
             '${movie.averageRating} / 10',
             style: styleH3,
           ),
-          Icon(icon, color: Colors.white,),
+          Icon(
+            icon,
+            color: Colors.white,
+          ),
         ],
       ),
     );

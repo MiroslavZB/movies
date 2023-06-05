@@ -7,6 +7,7 @@ const Color onPrimaryColor = Colors.white;
 const Color backgroundColor = Color(0xFFEDEFF7);
 const Color onBackgroundColor = Colors.black;
 const Color outlineColor = Color(0xFFE0E0E0);
+Color outlinedButtonColor = Colors.grey[800]!;
 
 MaterialColor createMaterialColor(Color color) {
   final hslColor = HSLColor.fromColor(color);
