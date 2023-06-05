@@ -1,23 +1,54 @@
-import 'package:flutter/material.dart';
+import 'package:movies/models/movie.dart';
+import 'package:movies/pages/details_page.dart';
 import 'package:movies/pages/home_page.dart';
+import 'package:movies/resources/utils.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
+final _rootNavigatorKey = GlobalKey<NavigatorState>();
+
+final _router = GoRouter(
+  initialLocation: Paths.home,
+  navigatorKey: _rootNavigatorKey,
+  routes: [
+    GoRoute(
+      parentNavigatorKey: _rootNavigatorKey,
+      path: Paths.home,
+      name: Paths.home,
+      pageBuilder: (context, state) {
+        return const NoTransitionPage(
+          child: HomePage(),
+        );
+      },
+    ),
+    GoRoute(
+      parentNavigatorKey: _rootNavigatorKey,
+      path: Paths.movieDetails,
+      name: Paths.movieDetails,
+      pageBuilder: (context, state) {
+        return NoTransitionPage(
+          child: DetailsPage(movie: state.extra as Movie),
+        );
+      },
+    ),
+  ],
+);
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Movies',
+    return MaterialApp.router(
+      title: appName,
+      debugShowCheckedModeBanner: false,
+      routerConfig: _router,
       theme: ThemeData(
         primarySwatch: primaryColor,
         fontFamily: 'Montserrat',
       ),
-      home: const HomePage(),
     );
   }
 }
