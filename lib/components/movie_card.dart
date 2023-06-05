@@ -15,39 +15,85 @@ class MovieCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(smallBorderRadius),
           child: Container(
             width: MediaQuery.of(context).size.width * 0.8,
-            decoration: const BoxDecoration(
-              color: Colors.black,
-            ),
+            color: Colors.black,
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Text(
-                    movie.title,
-                    style: styleH1,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                Expanded(
-                  child: Image.network(
-                    movie.posterUrl,
-                    frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-                      if (wasSynchronouslyLoaded) {
-                        return child;
-                      } else {
-                        return AnimatedSwitcher(
-                          duration: const Duration(milliseconds: 500),
-                          child: frame != null ? child : placeholder(),
-                        );
-                      }
-                    },
-                    errorBuilder: (_, __, ___) => placeholder(),
-                  ),
-                ),
+                titleAndWatchLater(),
+                poster(),
+                rating(),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget titleAndWatchLater() {
+    return Row(
+      children: [
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Text(
+              movie.title,
+              style: styleH1,
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+        IconButton(
+          onPressed: () {
+            // TODO
+          },
+          icon: const Icon(
+            Icons.watch_later_outlined,
+            color: onPrimaryColor,
+            size: mediumIconSize,
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget poster() {
+    return Expanded(
+      child: Image.network(
+        movie.posterUrl,
+        frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+          if (wasSynchronouslyLoaded) {
+            return child;
+          } else {
+            return AnimatedSwitcher(
+              duration: const Duration(milliseconds: 500),
+              child: frame != null ? child : placeholder(),
+            );
+          }
+        },
+        errorBuilder: (_, __, ___) => placeholder(),
+      ),
+    );
+  }
+
+  Widget rating() {
+    IconData icon;
+    if (movie.averageRating == '0') return Container();
+    if ((double.tryParse(movie.averageRating) ?? 0) < 8) {
+      icon = Icons.star_half_outlined;
+    } else {
+      icon = Icons.star;
+    }
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Text(
+            '${movie.averageRating} / 10',
+            style: styleH3,
+          ),
+          Icon(icon, color: Colors.white,),
+        ],
       ),
     );
   }
