@@ -1,25 +1,49 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:movies/controllers/user_controller.dart';
+import 'package:movies/firebase_options.dart';
 import 'package:movies/models/movie.dart';
+import 'package:movies/pages/auth_page.dart';
 import 'package:movies/pages/details_page.dart';
 import 'package:movies/pages/home_page.dart';
 import 'package:movies/resources/utils.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
 final _router = GoRouter(
-  initialLocation: Paths.home,
+  initialLocation: Paths.auth,
   navigatorKey: _rootNavigatorKey,
   routes: [
+    GoRoute(
+      parentNavigatorKey: _rootNavigatorKey,
+      path: Paths.auth,
+      name: Paths.auth,
+      pageBuilder: (context, state) {
+        return CustomTransitionPage<void>(
+          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+              FadeTransition(opacity: animation, child: child),
+          child: const AuthPage(),
+        );
+      },
+    ),
     GoRoute(
       parentNavigatorKey: _rootNavigatorKey,
       path: Paths.home,
       name: Paths.home,
       pageBuilder: (context, state) {
-        return const NoTransitionPage(
-          child: HomePage(),
+        return CustomTransitionPage<void>(
+          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+              FadeTransition(opacity: animation, child: child),
+          child: const HomePage(),
         );
       },
     ),

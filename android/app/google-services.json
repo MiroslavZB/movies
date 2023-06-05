@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1078150250470",
+    "project_id": "movies-study",
+    "storage_bucket": "movies-study.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1078150250470:android:ef272527401b7777122027",
+        "android_client_info": {
+          "package_name": "com.example.movies"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1078150250470-memeeipo6suvv0rmtjb50itfsb35i4ul.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3-1_UdaHK1NShiOHTR55u3tkldoUkpX8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1078150250470-memeeipo6suvv0rmtjb50itfsb35i4ul.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
