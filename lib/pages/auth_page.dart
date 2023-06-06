@@ -33,6 +33,7 @@ class AuthPage extends StatelessWidget {
           appName,
           style: styleH1.copyWith(
             fontSize: 60,
+            color: accentColor,
           ),
         ),
       ],
