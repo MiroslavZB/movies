@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:movies/models/movie.dart';
 import 'package:movies/services/api.dart';
+import 'package:movies/services/database.dart';
 
 class UserController extends ChangeNotifier {
   List<Movie> movies = [];
@@ -10,6 +11,7 @@ class UserController extends ChangeNotifier {
   List<int> yearSet = [];
   final GetStorage _storage = GetStorage();
   String _key = '';
+  String _email = '';
 
   Future<void> getMovies() async {
     final parsed = await Client.get();
@@ -27,31 +29,72 @@ class UserController extends ChangeNotifier {
     });
   }
 
-  void setKey(String key) {
-    _key = key;
+  void fetch() {
+    if (_key.isNotEmpty) {
+      fetchStorage();
+    } else {
+      fetchRemote();
+    }
+  }
+
+  void removeId(int id) {
+    savedIndexes.remove(id);
+    if (_key.isNotEmpty) {
+      removeIdStorage(id);
+    } else {
+      writeRemote();
+    }
     notifyListeners();
   }
 
-  void fetch() {
+  void addId(int id) {
+    savedIndexes.add(id);
+    if (_key.isNotEmpty) {
+      addIdStorage(id);
+    } else {
+      writeRemote();
+    }
+    notifyListeners();
+  }
+
+  // Guest User Functions
+  void setKey(String key) {
+    _key = key;
+  }
+
+  void fetchStorage() {
     if (_storage.hasData(_key)) {
       savedIndexes = List<int>.from(_storage.read(_key));
     }
     notifyListeners();
   }
 
-  void removeId(int id) {
-    savedIndexes.remove(id);
+  void removeIdStorage(int id) {
     write();
     notifyListeners();
   }
 
-  void addId(int id) {
-    savedIndexes.add(id);
+  void addIdStorage(int id) {
     write();
     notifyListeners();
   }
 
   void write() {
     _storage.write(_key, savedIndexes);
+  }
+
+  // Authenticated User Functions
+  void setEmail(String email) {
+    _email = email;
+  }
+
+  Future<void> fetchRemote() async {
+    final tempList = await Database.readUser(_email);
+    savedIndexes = tempList.map((e) => int.parse(e.toString())).toList();
+    notifyListeners();
+  }
+
+  Future<void> writeRemote() async {
+    Database.postUser(savedIndexes, _email);
   }
 }

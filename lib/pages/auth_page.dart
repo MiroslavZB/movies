@@ -49,8 +49,9 @@ class AuthPage extends StatelessWidget {
           final GoogleSignInAccount? account = await googleSignIn.signIn();
           if (account != null && context.mounted) {
             final controller = Provider.of<UserController>(context, listen: false);
-            controller.setKey(account.email);
-            controller.fetch();
+            controller.setEmail(account.email);
+            controller.setKey('');
+            controller.fetchRemote();
             context.push(Paths.home);
           }
         } catch (error) {
@@ -105,6 +106,7 @@ class AuthPage extends StatelessWidget {
           context.pop();
           final controller = Provider.of<UserController>(context, listen: false);
           controller.setKey('guest');
+          controller.setEmail('');
           controller.fetch();
           context.push(Paths.home);
         },
