@@ -17,7 +17,7 @@ class DetailsPage extends StatelessWidget {
       return true;
     }).toList();
     return Scaffold(
-      backgroundColor: primaryColor.shade800,
+      backgroundColor: primaryColor,
       appBar: AppBar(
         title: Text(movie.title, style: styleH3Bold),
       ),
