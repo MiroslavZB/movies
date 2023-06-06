@@ -7,12 +7,12 @@ class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomePage> createState() => HomePageState();
 }
 
 List<Movie> movies = [];
 
-class _HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
@@ -29,6 +29,13 @@ class _HomePageState extends State<HomePage> {
         ),
         leading: Container(),
         actions: [
+          IconButton(
+            onPressed: () => context.push(Paths.account),
+            icon: const Icon(
+              Icons.account_circle_outlined,
+              color: onPrimaryColor,
+            ),
+          ),
           IconButton(
             onPressed: () => getMovies(),
             icon: const Icon(
