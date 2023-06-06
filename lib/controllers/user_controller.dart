@@ -13,7 +13,7 @@ class UserController extends ChangeNotifier {
 
   void fetch() {
     if (_storage.hasData(_key)) {
-      savedIndexes = _storage.read(_key);
+      savedIndexes = List<int>.from(_storage.read(_key));
     }
     notifyListeners();
   }
