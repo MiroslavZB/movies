@@ -23,7 +23,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(appName, style: styleH1Bold),
+        title: Text(
+          appName,
+          style: styleH1Bold.copyWith(color: accentColor),
+        ),
+        leading: Container(),
         actions: [
           IconButton(
             onPressed: () => getMovies(),

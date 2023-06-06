@@ -17,6 +17,7 @@ class MovieCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(smallBorderRadius),
           child: Container(
             width: MediaQuery.of(context).size.width * 0.8,
+            height: MediaQuery.of(context).size.height * 0.8,
             color: Colors.black,
             child: Column(
               children: [
@@ -48,7 +49,7 @@ class MovieCard extends StatelessWidget {
           builder: (_, controller, __) {
             final bool state = controller.savedIndexes.contains(movie.id);
             return Container(
-              margin: const EdgeInsets.all(5),
+              margin: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: outlinedButtonColor,
@@ -80,6 +81,7 @@ class MovieCard extends StatelessWidget {
     return Expanded(
       child: Image.network(
         movie.posterUrl,
+        fit: BoxFit.fitWidth,
         frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
           if (wasSynchronouslyLoaded) {
             return child;
