@@ -1,5 +1,6 @@
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:movies/controllers/user_controller.dart';
+import 'package:movies/models/binary_alert.dart';
 import 'package:movies/resources/utils.dart';
 import 'package:provider/provider.dart';
 
@@ -96,12 +97,23 @@ class AuthPage extends StatelessWidget {
 
   guestLogIn(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        final controller = Provider.of<UserController>(context, listen: false);
-        controller.setKey('guest');
-        controller.fetch();
-        context.push(Paths.home);
-      },
+      onPressed: () => binaryDialog(
+        context,
+        question: "Are you sure you want to continue as guest? "
+            "Movies you bookmark won't be visible on other devices.",
+        positiveOnTap: () {
+          context.pop();
+          final controller = Provider.of<UserController>(context, listen: false);
+          controller.setKey('guest');
+          controller.fetch();
+          context.push(Paths.home);
+        },
+        insetPadding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).size.height / 5,
+          left: 20,
+          right: 20,
+        ),
+      ),
       style: ElevatedButton.styleFrom(
         backgroundColor: accentColor,
       ),
