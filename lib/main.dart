@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:movies/controllers/user_controller.dart';
 import 'package:movies/firebase_options.dart';
 import 'package:movies/models/movie.dart';
+import 'package:movies/pages/account_page.dart';
 import 'package:movies/pages/auth_page.dart';
 import 'package:movies/pages/details_page.dart';
 import 'package:movies/pages/home_page.dart';
@@ -56,6 +58,18 @@ final _router = GoRouter(
           transitionsBuilder: (context, animation, secondaryAnimation, child) =>
               FadeTransition(opacity: animation, child: child),
           child: DetailsPage(movie: state.extra as Movie),
+        );
+      },
+    ),
+    GoRoute(
+      parentNavigatorKey: _rootNavigatorKey,
+      path: Paths.account,
+      name: Paths.account,
+      pageBuilder: (context, state) {
+        return CustomTransitionPage<void>(
+          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+              FadeTransition(opacity: animation, child: child),
+          child: const AccountPage(),
         );
       },
     ),
