@@ -12,7 +12,6 @@ class UserController extends ChangeNotifier {
   }
 
   void fetch() {
-    print(_key);
     if (_storage.hasData(_key)) {
       savedIndexes = _storage.read(_key);
     }
