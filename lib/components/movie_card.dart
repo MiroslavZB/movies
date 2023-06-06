@@ -9,22 +9,26 @@ class MovieCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => context.push(Paths.movieDetails, extra: movie),
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(smallBorderRadius),
-          child: Container(
-            width: MediaQuery.of(context).size.width * 0.8,
-            height: MediaQuery.of(context).size.height * 0.8,
-            color: Colors.black,
-            child: Column(
-              children: [
-                titleAndWatchLater(),
-                poster(),
-                rating(),
-              ],
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxWidth: MediaQuery.of(context).size.width * 0.8,
+        maxHeight: MediaQuery.of(context).size.height * 0.8,
+      ),
+      child: InkWell(
+        onTap: () => context.push(Paths.movieDetails, extra: movie),
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(smallBorderRadius),
+            child: Container(
+              color: Colors.black,
+              child: Column(
+                children: [
+                  titleAndWatchLater(),
+                  poster(),
+                  rating(),
+                ],
+              ),
             ),
           ),
         ),
@@ -32,15 +36,16 @@ class MovieCard extends StatelessWidget {
     );
   }
 
+  // Widgets
   Widget titleAndWatchLater() {
     return Row(
       children: [
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(10.0),
             child: Text(
               movie.title,
-              style: styleH1,
+              style: styleH2,
               textAlign: TextAlign.center,
             ),
           ),
