@@ -1,6 +1,6 @@
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:movies/components/binary_alert.dart';
 import 'package:movies/controllers/user_controller.dart';
-import 'package:movies/models/binary_alert.dart';
 import 'package:movies/resources/utils.dart';
 import 'package:provider/provider.dart';
 
