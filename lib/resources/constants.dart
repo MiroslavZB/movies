@@ -38,3 +38,7 @@ const List<String> monthsText = [
 String formatDateTimeA(DateTime dateTime) {
   return '${dateTime.year} ${monthsText[dateTime.month]} ${dateTime.day}';
 }
+
+// Filtering
+const String defaultGenre = 'All Genres';
+const int defaultYear = 0;
