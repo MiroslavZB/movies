@@ -24,9 +24,7 @@ class UserController extends ChangeNotifier {
     movies = movies_;
     genreSet = movies.expand((e) => e.genres).toSet().toList();
     yearSet = movies.where((e) => e.year != null).map((e) => e.year!).toSet().toList();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      notifyListeners();
-    });
+    notifyListeners();
   }
 
   void fetch() {
