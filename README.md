@@ -6,7 +6,10 @@ Case Study for a Movie App
 
 Use HTTP to fetch movie data and display it.
 
-## Notes
+**Please note that the app must be run with ```flutter run --release```
+so that _sign in with google_ works.**
+
+## Improvements
 Possible improvements:
 1. More filters
 2. More login methods
