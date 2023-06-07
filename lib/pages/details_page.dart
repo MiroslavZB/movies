@@ -1,6 +1,5 @@
 import 'package:movies/models/movie.dart';
-
-import '../resources/utils.dart';
+import 'package:movies/resources/utils.dart';
 
 class DetailsPage extends StatelessWidget {
   const DetailsPage({Key? key, required this.movie}) : super(key: key);
